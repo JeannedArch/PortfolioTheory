@@ -128,5 +128,9 @@ dmypy.json
 # Pyre type checker
 .pyre/
 
-# Files to ignore
+# our stuff to ignore
 .DS_Store
+.idea
+/price_data.csv
+/tickers.csv
+/sp500tickers.pickle
