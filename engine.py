@@ -4,8 +4,7 @@ import numpy as np
 from tqdm import tqdm
 import pandas as pd
 import matplotlib.pyplot as plt
-import scipy.optimize as sco
-from pandas_datareader import data, wb
+from pandas_datareader import data
 import os
 import bs4 as bs
 import pickle
@@ -133,7 +132,7 @@ class MarkowitzPortfolio:
         self.mean_returns: pd.DataFrame = self.dh.mean_returns_df
         self.pct_returns: pd.DataFrame = self.dh.pct_change_returns_df
 
-        self.num_of_portfolios: int = 100
+        self.num_of_portfolios: int = 100 # default values
         self.num_of_trading_days: int = 252
         self.asset_sample_size: int = 30
         self.risk_free_rate: float = 0.01
@@ -164,7 +163,15 @@ class MarkowitzPortfolio:
         self.risk_free_rate = risk_free_rate
         self.vola_cut_off = vola_cut_off
 
-    def portfolio_annualised_performance(self, weights, returns, cov_matrix):
+    def portfolio_annualised_performance(self, weights, returns, cov_matrix) -> tuple:
+        """
+        generates the annualised performance per portfolio
+        :param weights: array of weights
+        :param returns:
+        :param cov_matrix:
+        :return:
+        """
+        # Todo kommentierung params
         returns = np.sum(returns * weights) * self.num_of_trading_days
         std = np.sqrt(np.dot(weights.T, np.dot(cov_matrix, weights))) * np.sqrt(self.num_of_trading_days)
         return std, returns
@@ -201,7 +208,7 @@ class MarkowitzPortfolio:
     def build_cov(self, sample_assets) -> np.array:
         return np.cov(self.pct_returns[sample_assets].T)
 
-    def run_portfolio_optimization(self) -> None:
+    def run_portfolio_optimization(self) -> None: # currently not used
         self.simulate_random_portfolios()
 
     def display_simulated_ef_with_random(self) -> None:

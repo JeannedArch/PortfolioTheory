@@ -134,3 +134,4 @@ dmypy.json
 /price_data.csv
 /tickers.csv
 /sp500tickers.pickle
+/RawData.xlsx
